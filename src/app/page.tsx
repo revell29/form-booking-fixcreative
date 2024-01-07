@@ -164,7 +164,7 @@ function IndexPage() {
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>
-                <FormLabel>Veneu</FormLabel>
+                <FormLabel>venue</FormLabel>
                 <FormControl>
                   <Input
                     onChange={handleChange}
