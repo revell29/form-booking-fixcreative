@@ -59,7 +59,7 @@ function IndexPage() {
     paket: '',
     estimate_location: '',
     date: '',
-    budget_range: '10 - 15 Juta',
+    budget_range: 'Rp',
     find_us: 'Instagram',
     why_us: '',
     message: '',
