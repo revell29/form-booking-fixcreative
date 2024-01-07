@@ -97,8 +97,8 @@ function IndexPage() {
           <h1 className='mb-2 text-3xl font-bold'>Get In Touch With Us </h1>
           <p>
             Setelah mengisi formulir di bawah ini, buka email Anda untuk
-            mendapatkan pricelist Askar Photography dan dapatkan penawaran
-            spesial dari kami!
+            mendapatkan pricelist Fix Creative Photography dan dapatkan
+            penawaran spesial dari kami!
           </p>
         </div>
         <Formik
