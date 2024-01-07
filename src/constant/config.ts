@@ -121,9 +121,10 @@ export const FIND_US = [
 
 export const parseMessage = (value: TFormData) => {
   const message = `Assalamualaikum Fix Creative Photography
-Saya ${value.email}, saya tertarik Menggunakan Jasa Fix Creative Photography
+Saya ${value.nama}, saya tertarik Menggunakan Jasa Fix Creative Photography
   
-Nama: ${value.email} 
+Nama: ${value.nama}
+Email: ${value.email}
 Kebutuhan: ${value.paket}
 Tanggal: ${value.date}
 Estimasi Budget: ${value.budget_range}
