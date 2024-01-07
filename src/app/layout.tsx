@@ -1,9 +1,55 @@
 import QueryWrapper from '@/components/query-wrapper';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Metadata } from 'next';
 import '../styles/globals.css';
 
 type RootLayoutProps = {
   children: React.ReactNode;
+};
+
+export const metadata: Metadata = {
+  title: 'Fix Creative Photography',
+  description:
+    'Jasa Photography & Video Wedding, Postwedding, Engagement, Decoration, Prewedding',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    title: 'Fix Creative Photography',
+    description:
+      'Jasa Photography & Video weddings, Postwedding, Engagement, Decoration, Prewedding',
+    images: [
+      {
+        url: '/assets/og.png',
+        alt: 'Fix Creative Photography',
+        width: 600,
+        height: 600,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    images: [
+      {
+        url: '/assets/og.png',
+        alt: 'Fix Creative Photography',
+        width: 600,
+        height: 600,
+      },
+    ],
+    title: 'Fix Creative Photography',
+    description:
+      'Jasa Photography & Video weddings, Postwedding, Engagement, Decoration, Prewedding',
+    card: 'summary_large_image',
+  },
+  icons: {
+    shortcut: '/assets/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {

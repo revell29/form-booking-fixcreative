@@ -1,5 +1,4 @@
 'use client';
-
 import { Button } from '@/components/ui/button';
 import {
   FormItem,
@@ -367,6 +366,7 @@ function IndexPage() {
               </FormItem>
               <Button
                 type='submit'
+                variant='default'
                 className='w-full'
                 disabled={isSubmitting}
                 isLoading={isSubmitting}
