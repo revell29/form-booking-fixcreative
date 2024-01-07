@@ -55,22 +55,31 @@ export const LIST_PAKET = [
 
 export const ALL_IN_PACKAGES = [
   {
-    value: 'Wedding',
+    value: 'Photo & Video Wedding',
   },
   {
-    value: 'Akad Only',
+    value: 'Photo & Video Intimate Wedding',
   },
   {
-    value: 'Engagement',
+    value: 'Photo & Video Post Wedding',
   },
   {
-    value: 'Postwedding',
+    value: 'Photo & Video Engagement',
   },
   {
-    value: 'Bundling 1 (Engagement & Wedding)',
+    value: 'Photo & Video Siraman',
   },
   {
-    value: 'Bundling 2 (Siraman, Engagement & Wedding)',
+    value: 'Paket All In Wedding',
+  },
+  {
+    value: 'Paket All In Intimate Wedding',
+  },
+  {
+    value: 'Paket All In Engagement',
+  },
+  {
+    value: 'Paket All In Siraman',
   },
 ];
 
