@@ -1,5 +1,6 @@
 import QueryWrapper from '@/components/query-wrapper';
 import { ThemeProvider } from '@/components/theme-provider';
+import { DOMAIN } from '@/constant/config';
 import { Metadata } from 'next';
 import '../styles/globals.css';
 
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
       'Jasa Photography & Video weddings, Postwedding, Engagement, Decoration, Prewedding',
     images: [
       {
-        url: '/assets/og.png',
+        url: `${DOMAIN}/assets/og.png`,
         alt: 'Fix Creative Photography',
         width: 600,
         height: 600,
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     images: [
       {
-        url: '/assets/og.png',
+        url: `${DOMAIN}/assets/og.png`,
         alt: 'Fix Creative Photography',
         width: 600,
         height: 600,
