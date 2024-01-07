@@ -1,0 +1,388 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import {
+  FormItem,
+  FormMessage,
+  FormControl,
+  FormLabel,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  ALL_IN_PACKAGES,
+  BUDGET_RANGE,
+  FIND_US,
+  LIST_PAKET,
+  parseMessage,
+} from '@/constant/config';
+import { Form, Formik } from 'formik';
+import Image from 'next/image';
+import * as React from 'react';
+import * as Yup from 'yup';
+
+export type TFormData = {
+  nama: string;
+  instagram: string;
+  email: string;
+  phone: string;
+  paket: string;
+  all_in_package: string;
+  estimate_location: string;
+  date: string;
+  budget_range: string;
+  find_us: string;
+  why_us: string;
+  message: string;
+};
+
+const SignInSchema = Yup.object().shape({
+  nama: Yup.string().required('Email harus diisi'),
+  instagram: Yup.string().required('Instagram harus diisi'),
+  email: Yup.string().email().required('Email harus diisi'),
+  phone: Yup.string().required('Nomor telepon harus diisi'),
+  paket: Yup.string().required('Paket harus diisi'),
+  all_in_package: Yup.string(),
+  estimate_location: Yup.string().required('Lokasi harus diisi'),
+  date: Yup.string().required('Tanggal harus diisi'),
+  budget_range: Yup.string().required('Range budget harus diisi'),
+  find_us: Yup.string().required('Temukan kami harus diisi'),
+  why_us: Yup.string().required('Alasan harus diisi'),
+  message: Yup.string().required('Pesan harus diisi'),
+});
+
+function IndexPage() {
+  const initialValues = {
+    nama: '',
+    instagram: '',
+    email: '',
+    phone: '',
+    paket: '',
+    all_in_package: '',
+    estimate_location: '',
+    date: '',
+    budget_range: '10 - 15 Juta',
+    find_us: 'Instagram',
+    why_us: '',
+    message: '',
+  };
+
+  const handleSubmit = (value: TFormData) => {
+    // Encode the message
+    const message = parseMessage(value);
+    const encodedMessage = encodeURIComponent(message);
+    const number = '6281315941338';
+
+    // Create the WhatsApp URL
+    const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`;
+
+    // Open the URL in a new window/tab
+    window.open(whatsappUrl, '_blank');
+  };
+
+  return (
+    <div className='container mx-auto flex min-h-screen max-w-xl flex-col items-center py-6'>
+      <div className='flex w-full flex-col space-y-4'>
+        <div className='mb-3 flex flex-col justify-start'>
+          <Image src='/assets/logo.png' alt='logo' width={150} height={100} />
+        </div>
+        <div className='my-5'>
+          <h1 className='mb-2 text-3xl font-bold'>Get In Touch With Us </h1>
+          <p>
+            Setelah mengisi formulir di bawah ini, buka email Anda untuk
+            mendapatkan pricelist Askar Photography dan dapatkan penawaran
+            spesial dari kami!
+          </p>
+        </div>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={SignInSchema}
+          onSubmit={(Value, action) => {
+            handleSubmit(Value);
+            action.resetForm();
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            setFieldValue,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Nama</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.nama}
+                    name='nama'
+                    className='py-5'
+                    placeholder='Salsa'
+                    autoComplete='off'
+                  />
+                </FormControl>
+                {errors.nama && touched.nama && (
+                  <FormMessage>{errors.nama}</FormMessage>
+                )}
+              </FormItem>
+
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    name='email'
+                    type='email'
+                    className='py-5'
+                    placeholder='salsa@gmail.com'
+                    autoComplete='off'
+                  />
+                </FormControl>
+                {errors.email && touched.email && (
+                  <FormMessage>{errors.email}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>No HP / Whatsapp</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.phone}
+                    name='phone'
+                    className='py-5'
+                    placeholder='62xxxxxxxxxx'
+                  />
+                </FormControl>
+                {errors.phone && touched.phone && (
+                  <FormMessage>{errors.phone}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Estimasi Lokasi</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.estimate_location}
+                    name='estimate_location'
+                    className='py-5'
+                    placeholder='Rumah, Kantor, dll'
+                    autoComplete='off'
+                  />
+                </FormControl>
+                {errors.estimate_location && touched.estimate_location && (
+                  <FormMessage>{errors.estimate_location}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Instagram</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.instagram}
+                    name='instagram'
+                    className='py-5'
+                    placeholder='@salsa'
+                  />
+                </FormControl>
+                {errors.instagram && touched.instagram && (
+                  <FormMessage>{errors.instagram}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Paket Foto & Video</FormLabel>
+                <FormControl className='w-full'>
+                  <Select
+                    onValueChange={(e) => setFieldValue('paket', e)}
+                    value={values.paket}
+                    defaultValue={values.paket}
+                    name='paket'
+                  >
+                    <SelectTrigger className='h-10 w-full'>
+                      <SelectValue placeholder='Pilih Paket' />
+                    </SelectTrigger>
+                    <SelectContent className='w-full'>
+                      <SelectGroup className='w-full'>
+                        {LIST_PAKET.map((value, index) => (
+                          <SelectItem key={index} value={value.value}>
+                            {value.value}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                {errors.paket && touched.paket && (
+                  <FormMessage>{errors.paket}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>All in Package</FormLabel>
+                <FormControl className='w-full'>
+                  <Select
+                    onValueChange={(e) => setFieldValue('all_in_package', e)}
+                    value={values.all_in_package}
+                    defaultValue={values.all_in_package}
+                    name='all_in_package'
+                  >
+                    <SelectTrigger className='h-10 w-full'>
+                      <SelectValue placeholder='Pilih Paket' />
+                    </SelectTrigger>
+                    <SelectContent className='w-full'>
+                      <SelectGroup className='w-full'>
+                        {ALL_IN_PACKAGES.map((value, index) => (
+                          <SelectItem key={index} value={value.value}>
+                            {value.value}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                {errors.all_in_package && touched.all_in_package && (
+                  <FormMessage>{errors.all_in_package}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Estimasi Tanggal</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.date}
+                    name='date'
+                    className='py-5'
+                    placeholder='3 Mei 2024'
+                  />
+                </FormControl>
+                {errors.date && touched.date && (
+                  <FormMessage>{errors.date}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Kisaran Budget</FormLabel>
+                <FormControl className='w-full'>
+                  <Select
+                    onValueChange={(e) => setFieldValue('budget_range', e)}
+                    value={values.budget_range}
+                    defaultValue={values.budget_range}
+                    name='budget_range'
+                  >
+                    <SelectTrigger className='h-10 w-full'>
+                      <SelectValue placeholder='Pilih Kisaran Budget' />
+                    </SelectTrigger>
+                    <SelectContent className='w-full'>
+                      <SelectGroup className='w-full'>
+                        {BUDGET_RANGE.map((value, index) => (
+                          <SelectItem key={index} value={value.value}>
+                            {value.value}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                {errors.budget_range && touched.budget_range && (
+                  <FormMessage>{errors.budget_range}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Bagaimana Kamu Menemukan Kami</FormLabel>
+                <FormControl className='w-full'>
+                  <Select
+                    onValueChange={(e) => setFieldValue('find_us', e)}
+                    value={values.find_us}
+                    defaultValue={values.find_us}
+                    name='find_us'
+                  >
+                    <SelectTrigger className='h-10 w-full'>
+                      <SelectValue placeholder='' />
+                    </SelectTrigger>
+                    <SelectContent className='w-full'>
+                      <SelectGroup className='w-full'>
+                        {FIND_US.map((value, index) => (
+                          <SelectItem key={index} value={value.value}>
+                            {value.value}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                {errors.find_us && touched.find_us && (
+                  <FormMessage>{errors.find_us}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Mengapa Kamu Memilih Kami</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.why_us}
+                    name='why_us'
+                    className='py-5'
+                    placeholder='Tulis disini'
+                  />
+                </FormControl>
+                {errors.why_us && touched.why_us && (
+                  <FormMessage>{errors.why_us}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>
+                  Apa yang anda harapkan dari Fix Creative Photography untuk
+                  mengabadikan moment indahmu?
+                </FormLabel>
+                <FormControl>
+                  <Textarea
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.message}
+                    name='message'
+                    className='py-5'
+                    placeholder='Tulis disini'
+                  />
+                </FormControl>
+                {errors.message && touched.message && (
+                  <FormMessage>{errors.message}</FormMessage>
+                )}
+              </FormItem>
+              <Button
+                type='submit'
+                className='w-full'
+                disabled={isSubmitting}
+                isLoading={isSubmitting}
+                size='lg'
+              >
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+      <footer className='mt-8 text-sm font-semibold text-gray-400'>
+        Powered by <a href='https://towedd.com'>Towedd</a>
+      </footer>
+    </div>
+  );
+}
+
+export default IndexPage;
