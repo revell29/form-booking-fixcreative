@@ -1,5 +1,7 @@
 import { TFormData } from '@/app/page';
 
+export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'http://localhost:3000';
+
 export const LIST_PAKET = [
   {
     value: 'Bronze Wedding',
