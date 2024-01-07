@@ -79,7 +79,7 @@ function IndexPage() {
     // Encode the message
     const message = parseMessage(value);
     const encodedMessage = encodeURIComponent(message);
-    const number = '6281315941338';
+    const number = process.env.NEXT_PUBLIC_DESTINATION_PHONE;
 
     // Create the WhatsApp URL
     const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`;
