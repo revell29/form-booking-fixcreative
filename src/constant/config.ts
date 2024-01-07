@@ -55,28 +55,22 @@ export const LIST_PAKET = [
 
 export const ALL_IN_PACKAGES = [
   {
-    value: 'Paket Rumah A',
+    value: 'Wedding',
   },
   {
-    value: 'Paket Rumah B',
+    value: 'Akad Only',
   },
   {
-    value: 'Paket Rumah C',
+    value: 'Engagement',
   },
   {
-    value: 'Paket Rumah D',
+    value: 'Postwedding',
   },
   {
-    value: 'Paket Aula / Gedung A',
+    value: 'Bundling 1 (Engagement & Wedding)',
   },
   {
-    value: 'Paket Aula / Gedung B',
-  },
-  {
-    value: 'Paket Aula / Gedung C',
-  },
-  {
-    value: 'Paket Aula / Gedung D',
+    value: 'Bundling 2 (Siraman, Engagement & Wedding)',
   },
 ];
 
@@ -127,19 +121,13 @@ export const FIND_US = [
 
 export const parseMessage = (value: TFormData) => {
   const message = `Assalamualaikum Fix Creative Photography
-Saya ${value.email}, saya menemukan Fix Creative Photography melalui ${
-    value.find_us
-  }.
-  
-saya tertarik Menggunakan Jasa Fix Creative Photography
+Saya ${value.email}, saya tertarik Menggunakan Jasa Fix Creative Photography
   
 Nama: ${value.email} 
-Kebutuhan: ${value.paket || value.all_in_package}
-Lokasi: ${value.estimate_location}
+Kebutuhan: ${value.paket}
 Tanggal: ${value.date}
 Estimasi Budget: ${value.budget_range}
 Rencana Tanggal: ${value.date}
-Rencana Tempat: ${value.estimate_location}
 
 Boleh di info Pricelistnya, Terimakasih Fix Creative Photography`;
   return message;

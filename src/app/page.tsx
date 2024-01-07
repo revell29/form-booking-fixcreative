@@ -16,13 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  ALL_IN_PACKAGES,
-  BUDGET_RANGE,
-  FIND_US,
-  LIST_PAKET,
-  parseMessage,
-} from '@/constant/config';
+import { ALL_IN_PACKAGES, FIND_US, parseMessage } from '@/constant/config';
 import { Form, Formik } from 'formik';
 import Image from 'next/image';
 import * as React from 'react';
@@ -34,7 +28,6 @@ export type TFormData = {
   email: string;
   phone: string;
   paket: string;
-  all_in_package: string;
   estimate_location: string;
   date: string;
   budget_range: string;
@@ -49,7 +42,6 @@ const SignInSchema = Yup.object().shape({
   email: Yup.string().email().required('Email harus diisi'),
   phone: Yup.string().required('Nomor telepon harus diisi'),
   paket: Yup.string().required('Paket harus diisi'),
-  all_in_package: Yup.string(),
   estimate_location: Yup.string().required('Lokasi harus diisi'),
   date: Yup.string().required('Tanggal harus diisi'),
   budget_range: Yup.string().required('Range budget harus diisi'),
@@ -65,7 +57,6 @@ function IndexPage() {
     email: '',
     phone: '',
     paket: '',
-    all_in_package: '',
     estimate_location: '',
     date: '',
     budget_range: '10 - 15 Juta',
@@ -78,10 +69,11 @@ function IndexPage() {
     // Encode the message
     const message = parseMessage(value);
     const encodedMessage = encodeURIComponent(message);
-    const number = process.env.NEXT_PUBLIC_DESTINATION_PHONE;
+    const phone_no =
+      process.env.NEXT_PUBLIC_DESTINATION_PHONE || '6281234567890';
 
     // Create the WhatsApp URL
-    const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${phone_no}?text=${encodedMessage}`;
 
     // Open the URL in a new window/tab
     window.open(whatsappUrl, '_blank');
@@ -146,7 +138,6 @@ function IndexPage() {
                     onBlur={handleBlur}
                     value={values.email}
                     name='email'
-                    type='email'
                     className='py-5'
                     placeholder='salsa@gmail.com'
                     autoComplete='off'
@@ -173,7 +164,7 @@ function IndexPage() {
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>
-                <FormLabel>Estimasi Lokasi</FormLabel>
+                <FormLabel>Veneu</FormLabel>
                 <FormControl>
                   <Input
                     onChange={handleChange}
@@ -206,40 +197,13 @@ function IndexPage() {
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>
-                <FormLabel>Paket Foto & Video</FormLabel>
+                <FormLabel>Paket</FormLabel>
                 <FormControl className='w-full'>
                   <Select
                     onValueChange={(e) => setFieldValue('paket', e)}
                     value={values.paket}
                     defaultValue={values.paket}
                     name='paket'
-                  >
-                    <SelectTrigger className='h-10 w-full'>
-                      <SelectValue placeholder='Pilih Paket' />
-                    </SelectTrigger>
-                    <SelectContent className='w-full'>
-                      <SelectGroup className='w-full'>
-                        {LIST_PAKET.map((value, index) => (
-                          <SelectItem key={index} value={value.value}>
-                            {value.value}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                {errors.paket && touched.paket && (
-                  <FormMessage>{errors.paket}</FormMessage>
-                )}
-              </FormItem>
-              <FormItem className='my-4 space-y-4'>
-                <FormLabel>All in Package</FormLabel>
-                <FormControl className='w-full'>
-                  <Select
-                    onValueChange={(e) => setFieldValue('all_in_package', e)}
-                    value={values.all_in_package}
-                    defaultValue={values.all_in_package}
-                    name='all_in_package'
                   >
                     <SelectTrigger className='h-10 w-full'>
                       <SelectValue placeholder='Pilih Paket' />
@@ -255,8 +219,8 @@ function IndexPage() {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                {errors.all_in_package && touched.all_in_package && (
-                  <FormMessage>{errors.all_in_package}</FormMessage>
+                {errors.paket && touched.paket && (
+                  <FormMessage>{errors.paket}</FormMessage>
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>
@@ -277,26 +241,15 @@ function IndexPage() {
               </FormItem>
               <FormItem className='my-4 space-y-4'>
                 <FormLabel>Kisaran Budget</FormLabel>
-                <FormControl className='w-full'>
-                  <Select
-                    onValueChange={(e) => setFieldValue('budget_range', e)}
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.budget_range}
-                    defaultValue={values.budget_range}
                     name='budget_range'
-                  >
-                    <SelectTrigger className='h-10 w-full'>
-                      <SelectValue placeholder='Pilih Kisaran Budget' />
-                    </SelectTrigger>
-                    <SelectContent className='w-full'>
-                      <SelectGroup className='w-full'>
-                        {BUDGET_RANGE.map((value, index) => (
-                          <SelectItem key={index} value={value.value}>
-                            {value.value}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                    className='py-5'
+                    placeholder='10 - 15 Juta'
+                  />
                 </FormControl>
                 {errors.budget_range && touched.budget_range && (
                   <FormMessage>{errors.budget_range}</FormMessage>
@@ -372,7 +325,7 @@ function IndexPage() {
                 isLoading={isSubmitting}
                 size='lg'
               >
-                Submit
+                Dapatkan Price List
               </Button>
             </Form>
           )}
