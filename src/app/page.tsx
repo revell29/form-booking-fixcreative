@@ -33,6 +33,7 @@ export type TFormData = {
   budget_range: string;
   find_us: string;
   why_us: string;
+  time: string;
   message: string;
 };
 
@@ -48,6 +49,7 @@ const SignInSchema = Yup.object().shape({
   find_us: Yup.string().required('Temukan kami harus diisi'),
   why_us: Yup.string().required('Alasan harus diisi'),
   message: Yup.string().required('Pesan harus diisi'),
+  time: Yup.string().required('Waktu harus diisi'),
 });
 
 function IndexPage() {
@@ -63,6 +65,7 @@ function IndexPage() {
     find_us: 'Instagram',
     why_us: '',
     message: '',
+    time: '',
   };
 
   const handleSubmit = (value: TFormData) => {
@@ -70,7 +73,7 @@ function IndexPage() {
     const message = parseMessage(value);
     const encodedMessage = encodeURIComponent(message);
     const phone_no =
-      process.env.NEXT_PUBLIC_DESTINATION_PHONE || '6281234567890';
+      process.env.NEXT_PUBLIC_DESTINATION_PHONE || '6285888074561';
 
     // Create the WhatsApp URL
     const whatsappUrl = `https://wa.me/${phone_no}?text=${encodedMessage}`;
@@ -88,7 +91,7 @@ function IndexPage() {
         <div className='my-5'>
           <h1 className='mb-2 text-3xl font-bold'>Get In Touch With Us </h1>
           <p>
-            Setelah mengisi formulir di bawah ini, buka email Anda untuk
+            Setelah mengisi formulir di bawah ini, buka Whatsapp Anda untuk
             mendapatkan pricelist Fix Creative Photography dan dapatkan
             penawaran spesial dari kami!
           </p>
@@ -164,7 +167,7 @@ function IndexPage() {
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>
-                <FormLabel>venue</FormLabel>
+                <FormLabel>Veneu</FormLabel>
                 <FormControl>
                   <Input
                     onChange={handleChange}
@@ -178,6 +181,23 @@ function IndexPage() {
                 </FormControl>
                 {errors.estimate_location && touched.estimate_location && (
                   <FormMessage>{errors.estimate_location}</FormMessage>
+                )}
+              </FormItem>
+              <FormItem className='my-4 space-y-4'>
+                <FormLabel>Waktu</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.time}
+                    name='time'
+                    className='py-5'
+                    placeholder='Cth: 10.00 - 14.00'
+                    autoComplete='off'
+                  />
+                </FormControl>
+                {errors.time && touched.time && (
+                  <FormMessage>{errors.time}</FormMessage>
                 )}
               </FormItem>
               <FormItem className='my-4 space-y-4'>

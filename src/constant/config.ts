@@ -132,12 +132,19 @@ export const parseMessage = (value: TFormData) => {
   const message = `Assalamualaikum Fix Creative Photography
 Saya ${value.nama}, saya tertarik Menggunakan Jasa Fix Creative Photography
   
-Nama: ${value.nama}
-Email: ${value.email}
-Kebutuhan: ${value.paket}
-Tanggal: ${value.date}
-Estimasi Budget: ${value.budget_range}
-Rencana Tanggal: ${value.date}
+*Nama*: ${value.nama}
+*Email*: ${value.email}
+*Kebutuhan*: ${value.paket}
+*Tanggal*: ${value.date}
+*Jam*: ${value.time}
+*Estimasi Budget*: ${value.budget_range}
+*Rencana Tanggal*: ${value.date}
+*Venue*: ${value.estimate_location}
+*Instagram*: ${value.instagram}
+
+Saya menentukan Fix Creative Photography dari *${value.find_us}*
+Kenapa Saya Memilih Fix Creative Photography: *${value.why_us}*
+Yang diharapkan dari Fix Creative Photography: ${value.message}
 
 Boleh di info Pricelistnya, Terimakasih Fix Creative Photography`;
   return message;
